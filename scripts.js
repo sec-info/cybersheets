@@ -1,7 +1,7 @@
-const cheatSheets = [
+const resources = [
   {
     title: "OWASP Top 10",
-    category: "General",
+    category: "Cheat Sheets",
     description: "A list of the top 10 most critical security risks to web applications.",
     url: "https://owasp.org/www-project-top-ten/"
   },
@@ -13,22 +13,45 @@ const cheatSheets = [
   },
   {
     title: "SSL/TLS Best Practices",
-    category: "Protocols",
+    category: "Tools",
     description: "Best practices for configuring SSL and TLS for secure communications.",
     url: "https://www.sslshopper.com/ssl-tls-best-practices.html"
   },
   {
     title: "Password Security Guidelines",
-    category: "Authentication",
+    category: "Cheat Sheets",
     description: "Recommendations for creating and managing secure passwords.",
     url: "https://www.cyber.gov.au/acsc/view-all-content/publications/passwords"
+  },
+  {
+    title: "Metasploit Framework",
+    category: "Tools",
+    description: "An open-source platform for developing, testing, and executing exploits.",
+    url: "https://www.metasploit.com/"
+  },
+  {
+    title: "Kali Linux",
+    category: "Tools",
+    description: "A popular open-source Linux distribution used for penetration testing and security auditing.",
+    url: "https://www.kali.org/"
+  },
+  {
+    title: "Security News from The Hacker News",
+    category: "News",
+    description: "Stay up-to-date with the latest cybersecurity news and updates.",
+    url: "https://thehackernews.com/"
+  },
+  {
+    title: "Security Weekly",
+    category: "News",
+    description: "A podcast and blog providing the latest in security news and analysis.",
+    url: "https://securityweekly.com/"
   }
-  // Add more cheat sheets here
 ];
 
 // Populate the category dropdown
 const categories = new Set();
-cheatSheets.forEach(sheet => categories.add(sheet.category));
+resources.forEach(resource => categories.add(resource.category));
 const categorySelect = document.getElementById('categoryFilter');
 categories.forEach(category => {
   const option = document.createElement('option');
@@ -37,40 +60,35 @@ categories.forEach(category => {
   categorySelect.appendChild(option);
 });
 
-// Function to render cheat sheets based on search and category filter
-function renderCheatSheets() {
+// Function to render resources based on search and category filter
+function renderResources() {
   const searchValue = document.getElementById('searchInput').value.toLowerCase();
   const categoryValue = categorySelect.value;
 
-  const filteredCheatSheets = cheatSheets.filter(sheet => {
-    const matchesSearch = sheet.title.toLowerCase().includes(searchValue) || sheet.description.toLowerCase().includes(searchValue);
-    const matchesCategory = categoryValue === 'all' || sheet.category === categoryValue;
+  const filteredResources = resources.filter(resource => {
+    const matchesSearch = resource.title.toLowerCase().includes(searchValue) || resource.description.toLowerCase().includes(searchValue);
+    const matchesCategory = categoryValue === 'all' || resource.category === categoryValue;
     return matchesSearch && matchesCategory;
   });
 
-  const cheatSheetList = document.getElementById('cheatSheetList');
-  cheatSheetList.innerHTML = '';
+  const resourceList = document.getElementById('resourceList');
+  resourceList.innerHTML = '';
 
-  filteredCheatSheets.forEach(sheet => {
-    const sheetDiv = document.createElement('div');
-    sheetDiv.classList.add('cheatSheetItem');
-    sheetDiv.innerHTML = `
-      <h3>${sheet.title}</h3>
-      <p>${sheet.description}</p>
-      <a href="${sheet.url}" target="_blank">View Cheat Sheet</a>
+  filteredResources.forEach(resource => {
+    const resourceDiv = document.createElement('div');
+    resourceDiv.classList.add('resourceItem');
+    resourceDiv.innerHTML = `
+      <h3>${resource.title}</h3>
+      <p>${resource.description}</p>
+      <a href="${resource.url}" target="_blank">View Resource</a>
     `;
-    cheatSheetList.appendChild(sheetDiv);
+    resourceList.appendChild(resourceDiv);
   });
 }
 
 // Event listeners for search and filter
-document.getElementById('searchInput').addEventListener('input', renderCheatSheets);
-categorySelect.addEventListener('change', renderCheatSheets);
-
-// Dark mode toggle
-document.getElementById('toggleTheme').addEventListener('click', () => {
-  document.body.classList.toggle('dark-mode');
-});
+document.getElementById('searchInput').addEventListener('input', renderResources);
+categorySelect.addEventListener('change', renderResources);
 
 // Initial render
-renderCheatSheets();
+renderResources();
