@@ -1,95 +1,76 @@
 const cheatSheets = [
   {
     title: "OWASP Top 10",
-    category: "Web Security",
-    link: "https://cheatsheetseries.owasp.org/Glossary.html"
+    category: "General",
+    description: "A list of the top 10 most critical security risks to web applications.",
+    url: "https://owasp.org/www-project-top-ten/"
   },
   {
-    title: "Linux Command Line",
-    category: "Operating Systems",
-    link: "https://files.fosswire.com/2007/08/fwunixref.pdf"
+    title: "NIST Cybersecurity Framework",
+    category: "Frameworks",
+    description: "A guide for improving the cybersecurity posture of an organization.",
+    url: "https://www.nist.gov/cyberframework"
   },
   {
-    title: "Nmap Cheat Sheet",
-    category: "Networking",
-    link: "https://cheatography.com/egre55/cheat-sheets/nmap/"
+    title: "SSL/TLS Best Practices",
+    category: "Protocols",
+    description: "Best practices for configuring SSL and TLS for secure communications.",
+    url: "https://www.sslshopper.com/ssl-tls-best-practices.html"
   },
   {
-    title: "Burp Suite",
-    category: "Web Security",
-    link: "https://cheatography.com/pentestmonkey/cheat-sheets/burp-suite/"
-  },
-  {
-    title: "Wireshark Filters",
-    category: "Networking",
-    link: "https://cheatography.com/fredwb/cheat-sheets/wireshark-display-filters/"
-  },
-  {
-    title: "Metasploit",
-    category: "Penetration Testing",
-    link: "https://cheatography.com/thepwned/cheat-sheets/metasploit/"
+    title: "Password Security Guidelines",
+    category: "Authentication",
+    description: "Recommendations for creating and managing secure passwords.",
+    url: "https://www.cyber.gov.au/acsc/view-all-content/publications/passwords"
   }
+  // Add more cheat sheets here
 ];
 
-function renderCheatSheets(filter = "all", search = "") {
-  const container = document.getElementById("cheatSheetList");
-  container.innerHTML = "";
+// Populate the category dropdown
+const categories = new Set();
+cheatSheets.forEach(sheet => categories.add(sheet.category));
+const categorySelect = document.getElementById('categoryFilter');
+categories.forEach(category => {
+  const option = document.createElement('option');
+  option.value = category;
+  option.textContent = category;
+  categorySelect.appendChild(option);
+});
 
-  const filtered = cheatSheets.filter(item => {
-    return (
-      (filter === "all" || item.category === filter) &&
-      item.title.toLowerCase().includes(search.toLowerCase())
-    );
+// Function to render cheat sheets based on search and category filter
+function renderCheatSheets() {
+  const searchValue = document.getElementById('searchInput').value.toLowerCase();
+  const categoryValue = categorySelect.value;
+
+  const filteredCheatSheets = cheatSheets.filter(sheet => {
+    const matchesSearch = sheet.title.toLowerCase().includes(searchValue) || sheet.description.toLowerCase().includes(searchValue);
+    const matchesCategory = categoryValue === 'all' || sheet.category === categoryValue;
+    return matchesSearch && matchesCategory;
   });
 
-  if (filtered.length === 0) {
-    container.innerHTML = "<p>No cheat sheets found.</p>";
-    return;
-  }
+  const cheatSheetList = document.getElementById('cheatSheetList');
+  cheatSheetList.innerHTML = '';
 
-  filtered.forEach(sheet => {
-    const card = document.createElement("div");
-    card.className = "cheat-card";
-    card.innerHTML = `
+  filteredCheatSheets.forEach(sheet => {
+    const sheetDiv = document.createElement('div');
+    sheetDiv.classList.add('cheatSheetItem');
+    sheetDiv.innerHTML = `
       <h3>${sheet.title}</h3>
-      <p><strong>Category:</strong> ${sheet.category}</p>
-      <a href="${sheet.link}" target="_blank">View Cheat Sheet</a>
+      <p>${sheet.description}</p>
+      <a href="${sheet.url}" target="_blank">View Cheat Sheet</a>
     `;
-    container.appendChild(card);
+    cheatSheetList.appendChild(sheetDiv);
   });
 }
 
-function populateCategories() {
-  const categories = [...new Set(cheatSheets.map(sheet => sheet.category))];
-  const select = document.getElementById("categoryFilter");
+// Event listeners for search and filter
+document.getElementById('searchInput').addEventListener('input', renderCheatSheets);
+categorySelect.addEventListener('change', renderCheatSheets);
 
-  categories.forEach(cat => {
-    const option = document.createElement("option");
-    option.value = cat;
-    option.textContent = cat;
-    select.appendChild(option);
-  });
-}
-
-document.getElementById("categoryFilter").addEventListener("change", () => {
-  renderCheatSheets(
-    document.getElementById("categoryFilter").value,
-    document.getElementById("searchInput").value
-  );
+// Dark mode toggle
+document.getElementById('toggleTheme').addEventListener('click', () => {
+  document.body.classList.toggle('dark-mode');
 });
 
-document.getElementById("searchInput").addEventListener("input", () => {
-  renderCheatSheets(
-    document.getElementById("categoryFilter").value,
-    document.getElementById("searchInput").value
-  );
-});
-
-document.getElementById("toggleTheme").addEventListener("click", () => {
-  document.body.classList.toggle("dark");
-});
-
-window.onload = () => {
-  populateCategories();
-  renderCheatSheets();
-};
+// Initial render
+renderCheatSheets();
