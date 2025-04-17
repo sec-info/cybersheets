@@ -1,29 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cybersecurity Cheat Sheets</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
     <h1>Cybersecurity Cheat Sheets</h1>
+    <p>Helpful resources to level up your security skills</p>
     <div class="controls">
       <input type="text" id="searchInput" placeholder="Search cheat sheets..." />
       <select id="categoryFilter">
         <option value="all">All Categories</option>
+        <!-- Categories will be dynamically populated -->
       </select>
-      <button id="toggleTheme">🌙</button>
+      <button id="toggleTheme">Toggle Dark Mode</button>
     </div>
   </header>
 
   <main id="cheatSheetList">
-    <!-- Cheat sheet items will be dynamically loaded here -->
-</main>
+    <!-- Cheat sheets will be dynamically loaded here -->
+  </main>
 
   <footer>
-    <p>&copy; 2025 Cybersecurity Cheat Sheets</p>
+    <p>&copy; 2025 Cybersecurity Cheat Sheets | All rights reserved.</p>
   </footer>
 
   <script src="script.js"></script>
