@@ -91,4 +91,4 @@ document.getElementById('searchInput').addEventListener('input', renderResources
 categorySelect.addEventListener('change', renderResources);
 
 // Initial render
-renderResources();
+document.addEventListener('DOMContentLoaded', renderResources);
