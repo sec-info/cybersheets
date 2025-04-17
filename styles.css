@@ -8,12 +8,6 @@ body {
   font-family: 'Arial', sans-serif;
   background-color: #f0f0f0;
   color: #333;
-  transition: background-color 0.3s ease;
-}
-
-body.dark-mode {
-  background-color: #333;
-  color: #f4f4f4;
 }
 
 header {
@@ -48,51 +42,32 @@ header p {
   width: 250px;
 }
 
-#toggleTheme {
-  padding: 10px 20px;
-  font-size: 1rem;
-  background-color: #0057d4;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-#toggleTheme:hover {
-  background-color: #0044cc;
-}
-
-#cheatSheetList {
+#resourceList {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 30px;
   padding: 20px;
 }
 
-.cheatSheetItem {
+.resourceItem {
   background-color: #fff;
   border-radius: 8px;
   padding: 20px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
 }
 
-.cheatSheetItem:hover {
-  transform: translateY(-5px);
-}
-
-.cheatSheetItem h3 {
+.resourceItem h3 {
   font-size: 1.5rem;
   color: #0044cc;
   margin-bottom: 10px;
 }
 
-.cheatSheetItem p {
+.resourceItem p {
   font-size: 1rem;
   margin-bottom: 15px;
 }
 
-.cheatSheetItem a {
+.resourceItem a {
   display: inline-block;
   padding: 10px;
   font-size: 1rem;
@@ -102,10 +77,9 @@ header p {
   border-radius: 5px;
   text-align: center;
   width: 100%;
-  transition: background-color 0.3s ease;
 }
 
-.cheatSheetItem a:hover {
+.resourceItem a:hover {
   background-color: #0044cc;
 }
 
