@@ -1,70 +1,89 @@
-:root {
-  --bg: #ffffff;
-  --text: #111;
-  --card-bg: #f0f0f0;
-  --accent: #0077cc;
-}
-
-body.dark {
-  --bg: #1a1a1a;
-  --text: #f5f5f5;
-  --card-bg: #2b2b2b;
-  --accent: #4db8ff;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: var(--bg);
-  color: var(--text);
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
 }
 
 header {
-  padding: 1rem;
-  background: var(--accent);
-  color: white;
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
   text-align: center;
+}
+
+header h1 {
+  font-size: 2.5rem;
 }
 
 .controls {
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
-  margin-top: 1rem;
-  gap: 1rem;
+  margin-top: 10px;
 }
 
-input, select, button {
-  padding: 0.5rem;
-  border: none;
-  border-radius: 4px;
+#searchInput {
+  padding: 8px;
+  font-size: 1rem;
+  margin-right: 10px;
+  width: 250px;
 }
 
-main {
+#categoryFilter {
+  padding: 8px;
+  font-size: 1rem;
+  margin-right: 10px;
+}
+
+#toggleTheme {
+  background: none;
+  border: 1px solid #fff;
+  color: #fff;
+  padding: 8px;
+  cursor: pointer;
+}
+
+#toggleTheme:hover {
+  background-color: #444;
+}
+
+#cheatSheetList {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1rem;
-  padding: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
 }
 
-.cheat-card {
-  background: var(--card-bg);
-  padding: 1rem;
+.cheatSheetItem {
+  background-color: #fff;
   border-radius: 8px;
-  box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+  padding: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.cheat-card h3 {
-  margin-top: 0;
+.cheatSheetItem h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
 }
 
-.cheat-card a {
-  color: var(--accent);
+.cheatSheetItem p {
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.cheatSheetItem a {
+  color: #007bff;
   text-decoration: none;
 }
 
 footer {
   text-align: center;
-  padding: 1rem;
-  font-size: 0.9rem;
+  padding: 20px;
+  background-color: #333;
+  color: #fff;
 }
